@@ -1,64 +1,51 @@
-//<?php
-/**
-//  * Requires the "PHP Email Form" library
-//* The "PHP Email Form" library is available only in the pro version of the template
-//* The library should be uploaded to: vendor/php-email-form/php-email-form.php
-//* For more info and help: https://bootstrapmade.com/php-email-form/
-//*/
-// Replace contact@example.com with your real receiving email address
-//$receiving_email_address = 'contact@example.com';
-//if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
-//include( $php_email_form );
-//} else {
-//die( 'Unable to load the "PHP Email Form" Library!');
-//}
-//$contact = new PHP_Email_Form;
-//$contact->ajax = true;
-//$contact->to = $receiving_email_address;
-//$contact->from_name = $_POST['name'];
-//$contact->from_email = $_POST['email'];
-//$contact->subject = $_POST['subject'];
-// Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
-/*
-//$contact->smtp = array(
-//'host' => 'example.com',
-//'username' => 'example',
-//'password' => 'pass',
-//'port' => '587'
-//);
-//*/
-//$contact->add_message( $_POST['name'], 'From');
-//$contact->add_message( $_POST['email'], 'Email');
-//$contact->add_message( $_POST['message'], 'Message', 10);
-//echo $contact->send();
-//?>
-
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulario de Contacto</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.4.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
 <div class="container">
-  <form>
-    <div class="mb-3 row">
-      <label for="inputName" class="col-4 col-form-label">Nombre</label>
-      <div class="col-8">
-        <input type="text" class="form-control" name="inputName" id="inputName" placeholder="Name" />
-      </div>
-    </div>
-    <fieldset class="mb-3 row">
-      <legend class="col-form-legend col-4">Group name</legend>
-      <div class="col-8">
-        you can use radio and checkboxes here
-      </div>
-    </fieldset>
-    <div class="mb-3 row">
-      <div class="offset-sm-4 col-sm-8">
-        <button type="submit" class="btn btn-primary">Action</button>
-      </div>
-    </div>
-  </form>
+    <h1>Formulario de Contacto</h1>
+    <form id="contactForm">
+        <div class="mb-3">
+            <label for="inputName" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="inputName" name="inputName" required>
+        </div>
+        <div class="mb-3">
+            <label for="inputEmail" class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control" id="inputEmail" name="inputEmail" required>
+            <div class="invalid-feedback">Por favor, introduce una dirección de correo electrónico válida.</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
 </div>
 
-<div class="mb-3">
-  <label for="" class="form-label">Email</label>
-  <input type="email" class="form-control" name="" id="" aria-describedby="emailHelpId" placeholder="abc@mail.com" />
-  <small id="emailHelpId" class="form-text text-muted">Help text</small>
-</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.4.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Validación del formulario usando Bootstrap
+    (function() {
+        'use strict'
 
-<button type="submit" class="btn btn-primary">Enviar</button>
+        // Obtener el formulario
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Iterar sobre cada formulario y prevenir el envío si no es válido
+        Array.prototype.slice.call(forms)
+            .forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+</body>
+</html>
